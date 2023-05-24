@@ -1,10 +1,10 @@
 import { InjectionToken } from '@angular/core';
 
 const quizDifficulties = ['easy', 'medium', 'hard'] as const;
-export type QuizDifficultyList = typeof quizDifficulties;
-export type QuizDifficulty = QuizDifficultyList[number];
+export type QuizDifficultyLevels = typeof quizDifficulties;
+export type QuizDifficulty = QuizDifficultyLevels[number];
 
-export const QUIZ_DIFFICULTY = new InjectionToken<QuizDifficultyList>('quizDifficulty', {
+export const QUIZ_DIFFICULTY = new InjectionToken<QuizDifficultyLevels>('quizDifficulty', {
   providedIn: 'root',
   factory: () => quizDifficulties,
 });

@@ -125,27 +125,6 @@ div[class*='emphasize-'] {
 .emphasize-border {
   box-shadow: inset 0 0 0 7px rgba(255, 255, 255, 0.5);
 }
-
-div[class*='rounded'] {
-  background: #fca1cc;
-}
-
-.light-rounded {
-  border-radius: 3px;
-}
-
-.heavy-rounded {
-  border-radius: 8px;
-}
-
-.full-rounded {
-  border-radius: 50%;
-}
-
-.barrel-rounded {
-  border-radius: 20px/60px;
-}
-
 select {
   display: inline-block;
   padding: 5px;
@@ -155,11 +134,13 @@ select {
 }
 
 button {
+  cursor: pointer;
   padding: 7px;
   background: #ff6000;
   color: white;
   border: none;
   &:disabled {
     background: #aaaaaa;
+    cursor: default;
   }
 }
