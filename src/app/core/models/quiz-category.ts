@@ -1,8 +1,8 @@
 export interface QuizCategory {
-  id: number;
-  name: string;
+  readonly id: number;
+  readonly name: string;
 }
 
 export interface QuizCategoryApiResponse {
-  trivia_categories: QuizCategory[];
+  readonly trivia_categories: QuizCategory[];
 }

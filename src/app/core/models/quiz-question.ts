@@ -1,27 +1,31 @@
 import { QuizDifficulty } from './quiz-difficulty';
 
-interface QuizAnswer {
-  answer: string;
-  correct: boolean;
+export interface QuizAnswer {
+  readonly answer: string;
+  readonly correct?: boolean;
 }
 
 export interface QuizQuestion {
-  category: string;
-  type: 'multiple' | 'boolean';
-  question: string;
-  answers: QuizAnswer[];
+  readonly question: string;
+  readonly answers: QuizAnswer[];
+}
+
+export interface QuizQuestionWithResult extends QuizQuestion {
+  result: QuizAnswer | null;
 }
 
 export interface QuizQuestionApiResponse {
-  results: Pick<QuizQuestion, 'category' | 'type' | 'question'> &
-    {
-      correct_answer: string;
-      incorrect_answers: string[];
-    }[];
+  results: (Pick<QuizQuestion, 'question'> & {
+    category: string;
+    type: 'multiple' | 'boolean';
+    difficulty: QuizDifficulty;
+    correct_answer: string;
+    incorrect_answers: string[];
+  })[];
 }
 
-export interface QuizQuestionParams {
-  category: number;
-  difficulty: QuizDifficulty;
-  amount: 5;
+export interface QuizQuestionApiParams {
+  readonly category: number;
+  readonly difficulty: QuizDifficulty;
+  readonly amount: 5;
 }

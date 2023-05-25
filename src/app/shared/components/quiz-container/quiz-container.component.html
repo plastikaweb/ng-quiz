@@ -1,0 +1,6 @@
+<div class="flex flex-column">
+
+  <app-question-container *ngFor="let quizQuestion of quizQuestions" [quizQuestion]="quizQuestion"
+    (sendAnswer)="onSelectAnswer($event)"></app-question-container>
+
+</div>

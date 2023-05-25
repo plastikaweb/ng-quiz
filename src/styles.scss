@@ -16,20 +16,35 @@ html {
   margin: 0;
 }
 
-.clearfix:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
 body {
   font-family: 'Lato', Calibri, Arial, sans-serif;
   background-color: #f0f0f0;
-  font-size: 16px;
+  font-size: 14px;
   color: #333;
   -webkit-font-smoothing: antialiased;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  margin: 0;
+  color: #666;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+h2 {
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 5px;
 }
 
 .clr {
@@ -44,7 +59,6 @@ body {
   position: relative;
 }
 
-/*header*/
 .container header {
   margin: 10px;
   padding: 20px 10px 10px 10px;
@@ -52,16 +66,6 @@ body {
   display: block;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   text-align: center;
-}
-
-.container header h1 {
-  font-size: 30px;
-  line-height: 38px;
-  margin: 0;
-  position: relative;
-  font-weight: 300;
-  color: #666;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 /*section*/
@@ -87,44 +91,14 @@ body {
   border-bottom-color: rgba(255, 255, 255, 0.4);
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-content: center;
+  flex-direction: row;
+  width: 800px;
+  margin: 0 auto;
+  gap: 3rem;
 }
 
-.demo-wrapper:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-.code-wrapper {
-  padding: 30px 40px 10px;
-  display: block;
-  background: #f0f0f0;
-  background: rgba(0, 0, 0, 0.06);
-  border-radius: 0 0 20px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-div[class*='emphasize-'] {
-  background: #69d2e7;
-}
-
-.emphasize-dark {
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.35);
-}
-
-.emphasize-light {
-  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.25);
-}
-
-.emphasize-inset {
-  box-shadow: inset 0 0 7px 4px rgba(255, 255, 255, 0.5);
-}
-
-.emphasize-border {
-  box-shadow: inset 0 0 0 7px rgba(255, 255, 255, 0.5);
-}
 select {
   display: inline-block;
   padding: 5px;
@@ -135,12 +109,32 @@ select {
 
 button {
   cursor: pointer;
-  padding: 7px;
-  background: #ff6000;
-  color: white;
-  border: none;
+  padding: 6px 15px;
+  border-radius: 5px;
+  background: rgb(20, 110, 200);
+  border: 1px solid rgb(20, 110, 200);
+  fill: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  &:hover {
+    background: rgb(10, 110, 220);
+    border-color: rgb(10, 110, 220);
+  }
   &:disabled {
-    background: #aaaaaa;
+    background: #dddddd;
+    color: #aaaaaa;
+    border-color: #dddddd;
     cursor: default;
   }
+  &.selected {
+    background: #339900;
+    border-color: #339900;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
 }
