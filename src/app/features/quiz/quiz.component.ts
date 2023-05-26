@@ -57,6 +57,8 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.quizForm.valid) {
+      this.quizStateService.saveQuiz(null);
+
       this.quizSubscription = this.quizQuestionsApiService
         .getList(this.quizForm.value as QuizQuestionApiParams)
         .pipe(tap(questions => this.quizStateService.saveQuiz(questions)))

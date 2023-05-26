@@ -3,6 +3,6 @@
   <app-question-container *ngFor="let quizQuestion of quizQuestions" [quizQuestion]="quizQuestion"
     (selectAnswer)="onSelectAnswer($event)"></app-question-container>
 
-  <button *ngIf="completed" class="button action-wrapper" (click)="sendResults()">Submit</button>
+  <button *ngIf="completed" class="button action-wrapper action" (click)="sendResults()">Submit</button>
 
 </div>

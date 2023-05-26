@@ -3,7 +3,7 @@
 </header>
 
 <main class="demo-wrapper">
-  <div *ngIf="(categories$ | async) as categories; else loading">
+  <div *ngIf="(categories$ | async) as categories; else loadingCategories">
     <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
       <div class="form-group">
         <select id="categorySelect" formControlName="category" class="form-control">
@@ -19,11 +19,15 @@
       </div>
     </form>
 
-    <app-quiz-container *ngIf="quizQuestions$ | async as questions" [quizQuestions]="questions"
+    <app-quiz-container *ngIf="(quizQuestions$ | async) as questions; else loadingQuiz" [quizQuestions]="questions"
       (quizCompleted)="onQuizCompleted($event)"></app-quiz-container>
   </div>
 </main>
 
-<ng-template #loading>
-  <p>Loading...</p>
+<ng-template #loadingCategories>
+  <p class="action-wrapper">Loading...</p>
+</ng-template>
+
+<ng-template #loadingQuiz>
+  <p class="action-wrapper">Select a category and difficulty to create the quiz</p>
 </ng-template>

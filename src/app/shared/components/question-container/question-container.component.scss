@@ -1,10 +1,11 @@
 .question-container {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 1rem;
   border-radius: 5px;
-  background-color: #f1b72030;
-  &-answer {
-    width: 180px;
-    display: grid;
+  background-color: rgb(180 210 253 / 54%);
+  &-answers {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 5px;
   }
 }

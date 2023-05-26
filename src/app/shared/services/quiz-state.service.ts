@@ -9,7 +9,7 @@ export class QuizStateService {
   private quizSubject = new BehaviorSubject<QuizQuestion[] | null>(null);
   quiz$ = this.quizSubject.asObservable();
 
-  saveQuiz(quiz: (QuizQuestion | QuizQuestion)[]): void {
+  saveQuiz(quiz: QuizQuestion[] | null): void {
     this.quizSubject.next(quiz);
   }
 }
