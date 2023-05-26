@@ -13,6 +13,8 @@ describe('QuestionContainerComponent', () => {
     fixture = TestBed.createComponent(QuestionContainerComponent);
     component = fixture.componentInstance;
     component.quizQuestion = {
+      id: 'id',
+      correct_answer: '',
       question: 'question',
       answers: [],
     };

@@ -2,8 +2,8 @@
   <h2 [innerHTML]="quizQuestion.question | safeHtml"></h2>
   <ul>
     <li class="question-container-answer" *ngFor="let answer of quizQuestion.answers | randomOrder">
-      <button [ngClass]="{'selected': answer.answer === result?.answer}" (click)="onClick(answer)"
-        [innerHTML]="answer.answer | safeHtml"></button>
+      <button [ngClass]="{'selected': answer === result}" (click)="onClick(answer)"
+        [innerHTML]="answer | safeHtml"></button>
     </li>
   </ul>
 

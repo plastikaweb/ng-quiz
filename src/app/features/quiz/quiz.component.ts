@@ -1,7 +1,8 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, Subscription, tap } from 'rxjs';
 import {
   QUIZ_DIFFICULTY,
   QuizCategory,
@@ -28,10 +29,10 @@ interface QuizForm {
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
   categories$!: Observable<QuizCategory[]>;
-  quizQuestions$!: Observable<QuizQuestion[] | null>;
-
+  quizQuestions$: Observable<QuizQuestion[] | null> = this.quizStateService.quiz$;
+  quizSubscription!: Subscription;
   quizForm = new FormGroup<QuizForm>({
     category: new FormControl(null, Validators.required),
     difficulty: new FormControl(null, Validators.required),
@@ -43,18 +44,28 @@ export class QuizComponent implements OnInit {
     private readonly quizCategoriesApiService: QuizCategoriesApiService,
     private readonly quizQuestionsApiService: QuizQuestionsApiService,
     private readonly quizStateService: QuizStateService,
+    private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
     this.categories$ = this.quizCategoriesApiService.getList();
   }
 
-  onSubmit() {
+  ngOnDestroy(): void {
+    this.quizSubscription?.unsubscribe();
+  }
+
+  onSubmit(): void {
     if (this.quizForm.valid) {
-      this.quizQuestions$ = this.quizQuestionsApiService.getList(this.quizForm.value as QuizQuestionApiParams).pipe(
-        tap(questions => this.quizStateService.saveQuiz(questions)),
-        switchMap(() => this.quizStateService.quiz$),
-      );
+      this.quizSubscription = this.quizQuestionsApiService
+        .getList(this.quizForm.value as QuizQuestionApiParams)
+        .pipe(tap(questions => this.quizStateService.saveQuiz(questions)))
+        .subscribe();
     }
+  }
+
+  onQuizCompleted(quiz: QuizQuestion[]): void {
+    this.quizStateService.saveQuiz(quiz);
+    this.router.navigateByUrl('/results');
   }
 }

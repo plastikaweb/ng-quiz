@@ -1,20 +1,43 @@
-import { NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { QuizAnswer, QuizQuestion, QuizQuestionWithResult } from 'src/app/core/models';
+import { NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { QuizQuestion } from 'src/app/core/models';
 import { QuestionContainerComponent } from '../question-container/question-container.component';
 
 @Component({
   selector: 'app-quiz-container',
   standalone: true,
-  imports: [QuestionContainerComponent, NgFor],
+  imports: [QuestionContainerComponent, NgFor, NgIf],
   templateUrl: './quiz-container.component.html',
   styleUrls: ['./quiz-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuizContainerComponent {
+export class QuizContainerComponent implements OnChanges {
   @Input() quizQuestions!: QuizQuestion[];
+  @Output() quizCompleted = new EventEmitter<QuizQuestion[]>();
+  protected completed = false;
+  private quizQuestionsWithResult: QuizQuestion[] = [];
 
-  protected onSelectAnswer(answer: QuizQuestionWithResult) {
-    console.log(answer);
+  ngOnChanges({ quizQuestions }: SimpleChanges): void {
+    if (quizQuestions) {
+      this.quizQuestionsWithResult = [];
+      this.completed = false;
+    }
+  }
+
+  protected onSelectAnswer(questionWithResult: QuizQuestion): void {
+    this.quizQuestionsWithResult = [
+      ...this.quizQuestionsWithResult.filter(question => question.id !== questionWithResult.id),
+      ...(questionWithResult.result ? [questionWithResult] : []),
+    ];
+
+    this.markCompleted();
+  }
+
+  markCompleted(): void {
+    this.completed = this.quizQuestions.length === this.quizQuestionsWithResult.length;
+  }
+
+  sendResults() {
+    this.quizCompleted.emit(this.quizQuestionsWithResult);
   }
 }

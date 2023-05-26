@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { QuizQuestion } from 'src/app/core/models';
 
 @Injectable({
@@ -7,18 +7,9 @@ import { QuizQuestion } from 'src/app/core/models';
 })
 export class QuizStateService {
   private quizSubject = new BehaviorSubject<QuizQuestion[] | null>(null);
-  public quiz$ = this.quizSubject.asObservable().pipe(filter(Boolean), map(this.getPartialQuiz));
+  quiz$ = this.quizSubject.asObservable();
 
-  public saveQuiz(quiz: QuizQuestion[]) {
+  saveQuiz(quiz: (QuizQuestion | QuizQuestion)[]): void {
     this.quizSubject.next(quiz);
-  }
-
-  private getPartialQuiz(quiz: QuizQuestion[]) {
-    return quiz.map(({ question, answers }) => ({
-      question,
-      answers: answers.map(({ answer }) => ({
-        answer,
-      })),
-    }));
   }
 }

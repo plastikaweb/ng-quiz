@@ -2,23 +2,28 @@
   <h1>QUIZ MAKER</h1>
 </header>
 
-<main class="demo-wrapper" *ngIf="categories$ | async as categories">
+<main class="demo-wrapper">
+  <div *ngIf="(categories$ | async) as categories; else loading">
+    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-group">
+        <select id="categorySelect" formControlName="category" class="form-control">
+          <option value="null" disabled>Select Category</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+        <select id="difficultySelect" formControlName="difficulty" class="form-control">
+          <option value="null" disabled>Select Difficulty</option>
+          <option *ngFor="let level of difficultyLevels">{{level}}</option>
+        </select>
 
-  <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
-    <div class="form-group">
-      <select id="categorySelect" formControlName="category" class="form-control">
-        <option value="null" disabled>Select Category</option>
-        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-      </select>
-      <select id="difficultySelect" formControlName="difficulty" class="form-control">
-        <option value="null" disabled>Select Difficulty</option>
-        <option *ngFor="let level of difficultyLevels">{{level}}</option>
-      </select>
+        <button id="createBtn" type="submit" [disabled]="!quizForm.valid">Create</button>
+      </div>
+    </form>
 
-      <button id="createBtn" type="submit" [disabled]="!quizForm.valid">Create</button>
-    </div>
-  </form>
-
-  <app-quiz-container *ngIf="quizQuestions$ | async as questions" [quizQuestions]="questions"></app-quiz-container>
-
+    <app-quiz-container *ngIf="quizQuestions$ | async as questions" [quizQuestions]="questions"
+      (quizCompleted)="onQuizCompleted($event)"></app-quiz-container>
+  </div>
 </main>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

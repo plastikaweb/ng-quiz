@@ -1,17 +1,11 @@
 import { QuizDifficulty } from './quiz-difficulty';
 
-export interface QuizAnswer {
-  readonly answer: string;
-  readonly correct?: boolean;
-}
-
 export interface QuizQuestion {
+  readonly id: string;
   readonly question: string;
-  readonly answers: QuizAnswer[];
-}
-
-export interface QuizQuestionWithResult extends QuizQuestion {
-  result: QuizAnswer | null;
+  readonly answers: string[];
+  readonly correct_answer: string;
+  result?: string | null;
 }
 
 export interface QuizQuestionApiResponse {

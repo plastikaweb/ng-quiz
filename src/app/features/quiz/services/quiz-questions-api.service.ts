@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { QuizQuestion, QuizQuestionApiParams, QuizQuestionApiResponse } from 'src/app/core/models';
 import { ApiService } from 'src/app/core/services/api.service';
+import { v4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,10 @@ export class QuizQuestionsApiService extends ApiService<QuizQuestion[], QuizQues
   protected override mapListResponse({ results }: QuizQuestionApiResponse): QuizQuestion[] {
     return results.map(({ correct_answer, incorrect_answers, question }) => {
       return {
+        id: v4(),
         question,
-        answers: [{ answer: correct_answer, correct: true }, ...incorrect_answers.map(answer => ({ answer, correct: false }))],
+        correct_answer,
+        answers: [correct_answer, ...incorrect_answers],
       } as QuizQuestion;
     });
   }
