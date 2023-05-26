@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 
 @Injectable()
-export abstract class ApiService<T, P = unknown> {
+export abstract class ApiService<T, P = unknown | null> {
   private readonly httpClient = inject(HttpClient);
   protected abstract endPoint: string;
 

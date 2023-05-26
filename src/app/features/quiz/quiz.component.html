@@ -2,32 +2,23 @@
   <h1>QUIZ MAKER</h1>
 </header>
 
-<main class="demo-wrapper">
-  <div *ngIf="(categories$ | async) as categories; else loadingCategories">
-    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
-      <div class="form-group">
-        <select id="categorySelect" formControlName="category" class="form-control">
-          <option value="null" disabled>Select Category</option>
-          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-        </select>
-        <select id="difficultySelect" formControlName="difficulty" class="form-control">
-          <option value="null" disabled>Select Difficulty</option>
-          <option *ngFor="let level of difficultyLevels">{{level}}</option>
-        </select>
+<main class="demo-wrapper" *ngIf="(categories$ | async) as categories">
+  <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="form-group">
+      <select id="categorySelect" formControlName="category" class="form-control">
+        <option value="null" disabled>Select Category</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+      </select>
+      <select id="difficultySelect" formControlName="difficulty" class="form-control">
+        <option value="null" disabled>Select Difficulty</option>
+        <option *ngFor="let level of difficultyLevels">{{level}}</option>
+      </select>
 
-        <button id="createBtn" type="submit" [disabled]="!quizForm.valid">Create</button>
-      </div>
-    </form>
+      <button id="createBtn" type="submit" [disabled]="!quizForm.valid">Create</button>
+    </div>
+  </form>
 
-    <app-quiz-container *ngIf="(quizQuestions$ | async) as questions; else loadingQuiz" [quizQuestions]="questions"
-      (quizCompleted)="onQuizCompleted($event)"></app-quiz-container>
-  </div>
+  <app-quiz-container *ngIf="(quizQuestions$ | async) as questions" [quizQuestions]="questions"
+    (quizCompleted)="onQuizCompleted($event)"></app-quiz-container>
+
 </main>
-
-<ng-template #loadingCategories>
-  <p class="action-wrapper">Loading...</p>
-</ng-template>
-
-<ng-template #loadingQuiz>
-  <p class="action-wrapper">Select a category and difficulty to create the quiz</p>
-</ng-template>

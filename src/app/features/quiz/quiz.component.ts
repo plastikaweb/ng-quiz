@@ -49,6 +49,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categories$ = this.quizCategoriesApiService.getList();
+    this.quizStateService.saveQuiz(null);
   }
 
   ngOnDestroy(): void {
