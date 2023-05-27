@@ -50,7 +50,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categories$ = this.quizCategoriesApiService.getList();
-    this.quizStateService.saveQuiz([]);
+    this.resetQuiz();
   }
 
   ngOnDestroy(): void {
@@ -59,11 +59,11 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.quizForm.valid) {
-      this.quizStateService.saveQuiz([]);
+      this.resetQuiz();
 
       this.quizSubscription = this.quizQuestionsApiService
         .getList(this.quizForm.value as QuizQuestionApiParams)
-        .pipe(tap(quiz => this.quizStateService.saveQuiz(quiz, true)))
+        .pipe(tap(quiz => this.quizStateService.saveQuiz(quiz, 'init')))
         .subscribe();
     }
   }
@@ -73,7 +73,11 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   sendResults() {
-    this.quizStateService.saveQuiz(this.quizFinished);
+    this.quizStateService.saveQuiz(this.quizFinished, 'done');
     this.router.navigateByUrl('/results');
+  }
+
+  private resetQuiz() {
+    this.quizStateService.saveQuiz([], 'reset');
   }
 }
