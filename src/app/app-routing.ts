@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'results',
     title: 'Result',
     loadComponent: () => import('./features/results/results.component').then(m => m.ResultsComponent),
-    canActivate: [() => inject(QuizStateService).quizStateIsDone() || inject(Router).createUrlTree(['/quiz'])],
+    canActivate: [() => inject(QuizStateService).quizState() === 'done' || inject(Router).createUrlTree(['/quiz'])],
   },
   { path: '', redirectTo: 'quiz', pathMatch: 'full' },
   { path: '**', redirectTo: 'quiz' },

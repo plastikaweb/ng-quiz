@@ -48,7 +48,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (!this.quizCategoriesStateService.quizCategoriesStateIsDone()) {
+    if (this.quizCategoriesStateService.quizCategoriesState() !== 'done') {
       this.quizCategoriesApiService
         .getList()
         .pipe(
