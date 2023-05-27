@@ -1,8 +1,7 @@
 <div class="flex flex-column">
-
   <app-question-container *ngFor="let quizQuestion of quizQuestions" [quizQuestion]="quizQuestion"
-    (selectAnswer)="onSelectAnswer($event)"></app-question-container>
+    (selectAnswer)="onSelectAnswer($event)" [readOnly]="readOnly"></app-question-container>
 
-  <button *ngIf="completed" class="button action-wrapper action" (click)="sendResults()">Submit</button>
+  <ng-content select="bottom"></ng-content>
 
 </div>

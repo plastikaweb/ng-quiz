@@ -38,6 +38,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     difficulty: new FormControl(null, Validators.required),
     amount: new FormControl(5, { nonNullable: true }),
   });
+  protected quizFinished!: QuizQuestion[];
 
   constructor(
     @Inject(QUIZ_DIFFICULTY) protected readonly difficultyLevels: QuizDifficultyLevels,
@@ -49,7 +50,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categories$ = this.quizCategoriesApiService.getList();
-    this.quizStateService.saveQuiz(null);
+    this.quizStateService.saveQuiz([]);
   }
 
   ngOnDestroy(): void {
@@ -58,17 +59,21 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.quizForm.valid) {
-      this.quizStateService.saveQuiz(null);
+      this.quizStateService.saveQuiz([]);
 
       this.quizSubscription = this.quizQuestionsApiService
         .getList(this.quizForm.value as QuizQuestionApiParams)
-        .pipe(tap(questions => this.quizStateService.saveQuiz(questions)))
+        .pipe(tap(quiz => this.quizStateService.saveQuiz(quiz, true)))
         .subscribe();
     }
   }
 
   onQuizCompleted(quiz: QuizQuestion[]): void {
-    this.quizStateService.saveQuiz(quiz);
+    this.quizFinished = quiz;
+  }
+
+  sendResults() {
+    this.quizStateService.saveQuiz(this.quizFinished);
     this.router.navigateByUrl('/results');
   }
 }

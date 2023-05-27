@@ -2,6 +2,13 @@
   <h1>RESULTS</h1>
 </header>
 
-<main class="demo-wrapper">
+<main class="demo-wrapper" *ngIf="{ score: quizScore$ | async, questions: quizQuestions$ | async } as obs">
+  <app-quiz-container [quizQuestions]="obs.questions || []" [readOnly]="true"></app-quiz-container>
+
+  <div bottom class="flex flex-column">
+    <div class="score-wrapper" [appScoreStyle]="obs.score || 0">You scored {{obs.score }} out of {{
+      obs.questions?.length }}</div>
+    <a bottom class="button action-wrapper action" routerLink="[/quiz]">Create a new quiz</a>
+  </div>
 
 </main>

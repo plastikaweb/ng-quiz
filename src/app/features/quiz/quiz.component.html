@@ -21,4 +21,6 @@
   <app-quiz-container *ngIf="(quizQuestions$ | async) as questions" [quizQuestions]="questions"
     (quizCompleted)="onQuizCompleted($event)"></app-quiz-container>
 
+  <button bottom *ngIf="quizFinished" class="button action-wrapper action" (click)="sendResults()">Submit</button>
+
 </main>

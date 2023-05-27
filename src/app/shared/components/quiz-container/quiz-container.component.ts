@@ -13,6 +13,7 @@ import { QuestionContainerComponent } from '../question-container/question-conta
 })
 export class QuizContainerComponent implements OnChanges {
   @Input() quizQuestions!: QuizQuestion[];
+  @Input() readOnly = false;
   @Output() quizCompleted = new EventEmitter<QuizQuestion[]>();
   protected completed = false;
   private quizQuestionsWithResult: QuizQuestion[] = [];
@@ -33,11 +34,10 @@ export class QuizContainerComponent implements OnChanges {
     this.markCompleted();
   }
 
-  markCompleted(): void {
-    this.completed = this.quizQuestions.length === this.quizQuestionsWithResult.length;
-  }
-
-  sendResults() {
-    this.quizCompleted.emit(this.quizQuestionsWithResult);
+  private markCompleted(): void {
+    if (this.quizQuestions.length === this.quizQuestionsWithResult.length) {
+      console.log(this.quizQuestionsWithResult);
+      this.quizCompleted.emit(this.quizQuestionsWithResult);
+    }
   }
 }
