@@ -22,11 +22,12 @@ export class QuizStateService {
       );
     }),
   );
+
+  constructor(private readonly randomOrderPipe: RandomOrderPipe) {}
+
   quizStateIsDone(): boolean {
     return this.state === 'done';
   }
-
-  constructor(private readonly randomOrderPipe: RandomOrderPipe) {}
 
   saveQuiz(quiz: QuizQuestion[], state: QuizState): void {
     this.state = state;

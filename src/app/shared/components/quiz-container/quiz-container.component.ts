@@ -20,21 +20,23 @@ export class QuizContainerComponent implements OnChanges {
 
   ngOnChanges({ quizQuestions }: SimpleChanges): void {
     if (quizQuestions) {
-      this.quizQuestionsWithResult = [];
+      this.quizQuestionsWithResult = [...quizQuestions.currentValue];
       this.completed = false;
     }
   }
 
   protected onSelectAnswer(questionWithResult: QuizQuestion): void {
-    this.quizQuestionsWithResult = [
-      ...this.quizQuestionsWithResult.filter(question => question.id !== questionWithResult.id),
-      ...(questionWithResult.result ? [questionWithResult] : []),
-    ];
+    this.quizQuestionsWithResult = this.quizQuestionsWithResult.map(question => {
+      if (question.id === questionWithResult.id) {
+        return { ...question, result: questionWithResult.result };
+      }
+      return question;
+    });
 
     this.markCompleted();
   }
 
   private markCompleted(): void {
-    this.quizCompleted.emit(this.quizQuestions.length === this.quizQuestionsWithResult.length ? this.quizQuestionsWithResult : []);
+    this.quizCompleted.emit(this.quizQuestionsWithResult.every(question => question.result) ? this.quizQuestionsWithResult : []);
   }
 }
