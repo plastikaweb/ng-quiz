@@ -90,6 +90,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   private resetQuiz() {
-    this.quizStateService.saveQuiz([], 'reset');
+    this.quizFinished = [];
+    this.quizStateService.saveQuiz(this.quizFinished, 'reset');
   }
 }

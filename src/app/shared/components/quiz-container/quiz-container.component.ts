@@ -15,13 +15,11 @@ export class QuizContainerComponent implements OnChanges {
   @Input() quizQuestions!: QuizQuestion[];
   @Input() readOnly = false;
   @Output() quizCompleted = new EventEmitter<QuizQuestion[]>();
-  protected completed = false;
   private quizQuestionsWithResult: QuizQuestion[] = [];
 
   ngOnChanges({ quizQuestions }: SimpleChanges): void {
     if (quizQuestions) {
       this.quizQuestionsWithResult = [...quizQuestions.currentValue];
-      this.completed = false;
     }
   }
 
