@@ -2,7 +2,7 @@
   <h1>QUIZ MAKER</h1>
 </header>
 
-<main class="demo-wrapper" *ngIf="(categories$ | async) as categories">
+<main class="demo-wrapper" *ngIf="(quizCategories$ | async) as categories">
   <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="form">
     <div class="form-group">
       <select id="categorySelect" formControlName="category" class="form-control">
