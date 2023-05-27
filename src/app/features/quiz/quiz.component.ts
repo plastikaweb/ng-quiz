@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription, tap } from 'rxjs';
@@ -28,6 +28,7 @@ interface QuizForm {
   imports: [ReactiveFormsModule, NgFor, NgIf, AsyncPipe, QuizContainerComponent],
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuizComponent implements OnInit, OnDestroy {
   categories$!: Observable<QuizCategory[]>;
@@ -38,7 +39,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     difficulty: new FormControl(null, Validators.required),
     amount: new FormControl(5, { nonNullable: true }),
   });
-  protected quizFinished!: QuizQuestion[];
+  protected quizFinished: QuizQuestion[] = [];
 
   constructor(
     @Inject(QUIZ_DIFFICULTY) protected readonly difficultyLevels: QuizDifficultyLevels,

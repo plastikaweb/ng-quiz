@@ -30,7 +30,6 @@ export class QuizStateService {
 
   saveQuiz(quiz: QuizQuestion[], state: QuizState): void {
     this.state = state;
-    console.log(this.state);
     if (state === 'init') {
       quiz = this.randomizeAnswers(quiz);
     }

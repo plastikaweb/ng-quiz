@@ -35,9 +35,6 @@ export class QuizContainerComponent implements OnChanges {
   }
 
   private markCompleted(): void {
-    if (this.quizQuestions.length === this.quizQuestionsWithResult.length) {
-      console.log(this.quizQuestionsWithResult);
-      this.quizCompleted.emit(this.quizQuestionsWithResult);
-    }
+    this.quizCompleted.emit(this.quizQuestions.length === this.quizQuestionsWithResult.length ? this.quizQuestionsWithResult : []);
   }
 }
