@@ -10,9 +10,7 @@
   }
 
   div.button {
-    background: rgb(20, 110, 200);
-    border-color: rgb(20, 110, 200);
-    color: rgb(255, 255, 255);
     cursor: default !important;
+    pointer-events: none;
   }
 }

@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Router, Routes } from '@angular/router';
-import { QuizStateService } from './shared/services/quiz-state.service';
+import { QuizStateService } from '@quiz/services';
 
 export const routes: Routes = [
   {
@@ -14,6 +14,5 @@ export const routes: Routes = [
     loadComponent: () => import('./features/results/results.component').then(m => m.ResultsComponent),
     canActivate: [() => inject(QuizStateService).quizState() === 'done' || inject(Router).createUrlTree(['/quiz'])],
   },
-  { path: '', redirectTo: 'quiz', pathMatch: 'full' },
-  { path: '**', redirectTo: 'quiz' },
+  { path: '**', redirectTo: 'quiz', pathMatch: 'full' },
 ];

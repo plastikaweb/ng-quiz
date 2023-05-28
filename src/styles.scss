@@ -101,6 +101,10 @@ a {
 .score-wrapper {
   width: 100%;
   padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-variant: petite-caps;
+  font-size: 1.2em;
 }
 
 select {
@@ -117,12 +121,12 @@ button,
   text-align: center;
   padding: 6px 15px;
   border-radius: 5px;
-  background: rgb(20, 110, 200);
-  border: 1px solid rgb(20, 110, 200);
-  color: rgb(255, 255, 255);
+  background: #bdb8d27a;
+  border: 1px solid #bdb8d27a;
+  color: #000000;
   &:hover {
-    background: rgb(10, 110, 220);
-    border-color: rgb(10, 110, 220);
+    background: rgb(205 209 221);
+    border-color: rgb(205 209 221);
   }
   &:disabled {
     background: #dddddd;
@@ -134,8 +138,12 @@ button,
     background: #339900;
     border-color: #339900;
   }
+  &.primary {
+    background: rgb(20, 110, 200);
+    border: 1px solid rgb(20, 110, 200);
+  }
   &.action {
-    background: rgb(10, 10, 100);
+    background: rgb(51, 21, 120);
     color: #ffffff;
     text-transform: uppercase;
     padding-top: 12px;
@@ -168,4 +176,8 @@ button,
   background-color: #339900 !important;
   border-color: #339900 !important;
   color: white !important;
+}
+
+.full-w {
+  width: 100%;
 }

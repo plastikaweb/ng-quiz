@@ -10,8 +10,7 @@
 </div>
 
 <ng-template #notReadOnlyTpl let-answer="answer">
-  <button [ngClass]="{'selected': answer === result}" (click)="onClick(answer)"
-    [innerHTML]="answer | safeHtml"></button>
+  <button [ngClass]="{'high': answer === result}" (click)="onClick(answer)" [innerHTML]="answer | safeHtml"></button>
 </ng-template>
 
 <ng-template #readOnlyTpl let-answer="answer">

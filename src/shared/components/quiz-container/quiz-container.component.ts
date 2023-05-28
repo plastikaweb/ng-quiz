@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { QuizQuestion } from 'src/app/core/models';
+import { QuizQuestion } from '@quiz/models';
 import { QuestionContainerComponent } from '../question-container/question-container.component';
 
 @Component({
@@ -8,7 +8,13 @@ import { QuestionContainerComponent } from '../question-container/question-conta
   standalone: true,
   imports: [QuestionContainerComponent, NgFor, NgIf],
   templateUrl: './quiz-container.component.html',
-  styleUrls: ['./quiz-container.component.scss'],
+  styles: [
+    `
+      :host {
+        width: 100%;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuizContainerComponent implements OnChanges {

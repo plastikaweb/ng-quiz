@@ -2,10 +2,10 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { QuizContainerComponent } from '@quiz/components';
+import { QUIZ_DIFFICULTY, QuizDifficulty, QuizDifficultyLevels, QuizQuestion, QuizQuestionApiParams } from '@quiz/models';
+import { QuizStateService } from '@quiz/services';
 import { Subject, takeUntil, tap } from 'rxjs';
-import { QUIZ_DIFFICULTY, QuizDifficulty, QuizDifficultyLevels, QuizQuestion, QuizQuestionApiParams } from 'src/app/core/models';
-import { QuizContainerComponent } from 'src/app/shared/components/quiz-container/quiz-container.component';
-import { QuizStateService } from '../../shared/services/quiz-state.service';
 import { QuizCategoriesApiService } from './services/quiz-categories-api.service';
 import { QuizQuestionsApiService } from './services/quiz-questions-api.service';
 import { QuzCategoriesStateService } from './services/quz-categories-state.service';
@@ -21,7 +21,6 @@ interface QuizForm {
   selector: 'app-quiz',
   imports: [ReactiveFormsModule, NgFor, NgIf, AsyncPipe, QuizContainerComponent],
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuizComponent implements OnInit, OnDestroy {

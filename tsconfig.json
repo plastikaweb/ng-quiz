@@ -19,10 +19,16 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"],
+    "paths": {
+      "@quiz/models": ["src/core/models/index.ts"],
+      "@quiz/interceptors": ["src/core/interceptors/index.ts"],
+      "@quiz/core/services": ["src/core/services/index.ts"],
+      "@quiz/components": ["src/shared/components/index.ts"],
+      "@quiz/directives": ["src/shared/directives/index.ts"],
+      "@quiz/pipes": ["src/shared/pipes/index.ts"],
+      "@quiz/services": ["src/shared/services/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RandomOrderPipe } from '../../shared/pipes/random-order.pipe';
+import { RandomOrderPipe } from '../../../shared/pipes/random-order.pipe';
 import { QuizComponent } from './quiz.component';
 import { QuizCategoriesApiService } from './services/quiz-categories-api.service';
 

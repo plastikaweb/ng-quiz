@@ -1,7 +1,7 @@
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { QuizQuestion } from 'src/app/core/models';
-import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
+import { QuizQuestion } from '@quiz/models';
+import { SafeHtmlPipe } from '@quiz/pipes';
 
 @Component({
   selector: 'app-question-container',

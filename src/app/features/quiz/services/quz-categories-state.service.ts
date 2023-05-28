@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { QuizCategory } from 'src/app/core/models';
-import { QuizCategoriesState } from '../../../core/models/model-state';
+import { QuizCategoriesState, QuizCategory } from 'src/core/models';
 
 @Injectable({
   providedIn: 'root',

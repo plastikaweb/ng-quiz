@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { QuizCategory, QuizCategoryApiResponse } from 'src/app/core/models';
-import { ApiService } from 'src/app/core/services/api.service';
+import { ApiService } from '@quiz/core/services';
+import { QuizCategory, QuizCategoryApiResponse } from '@quiz/models';
 
 @Injectable({
   providedIn: 'root',

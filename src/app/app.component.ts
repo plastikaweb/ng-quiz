@@ -1,15 +1,15 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LoadingService } from './core/services/loading.service';
-import { OverlayLoadingComponent } from './shared/components/overlay-loading/overlay-loading.component';
+import { LoadingService } from '@quiz/core/services';
+import { OverlayLoadingComponent } from '@quiz/components';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AsyncPipe, NgIf, OverlayLoadingComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   isLoading$ = this.loadingService.isLoading$;

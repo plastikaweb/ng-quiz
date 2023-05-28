@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { QuizQuestion, QuizQuestionApiParams, QuizQuestionApiResponse } from 'src/app/core/models';
-import { ApiService } from 'src/app/core/services/api.service';
+import { ApiService } from '@quiz/core/services';
+import { QuizQuestion, QuizQuestionApiParams, QuizQuestionApiResponse } from '@quiz/models';
 import { v4 } from 'uuid';
 
 @Injectable({

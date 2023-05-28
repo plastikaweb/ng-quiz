@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
+import { QuizQuestion, QuizState } from '@quiz/models';
+import { RandomOrderPipe } from '@quiz/pipes';
 import { BehaviorSubject, map } from 'rxjs';
-import { QuizState } from '../../core/models/model-state';
-import { QuizQuestion } from '../../core/models/quiz-question';
-import { RandomOrderPipe } from '../pipes/random-order.pipe';
 
 @Injectable({
   providedIn: 'root',
