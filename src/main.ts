@@ -6,7 +6,17 @@ import { provideRouter } from '@angular/router';
 import { loadingInterceptor } from '@quiz/interceptors';
 import { RandomOrderPipe } from '@quiz/pipes';
 import { routes } from './app/app-routing';
+import { environment } from './environments/environment.development';
+import { ENVIRONMENT } from '@quiz/core/services';
 
 bootstrapApplication(AppComponent, {
-  providers: [provideHttpClient(withInterceptors([loadingInterceptor])), provideRouter(routes), RandomOrderPipe],
+  providers: [
+    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideRouter(routes),
+    RandomOrderPipe,
+    {
+      provide: ENVIRONMENT,
+      useValue: environment,
+    },
+  ],
 }).catch(err => console.error(err));

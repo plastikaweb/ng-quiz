@@ -7,8 +7,8 @@ import { QUIZ_DIFFICULTY, QuizDifficulty, QuizDifficultyLevels, QuizQuestion, Qu
 import { QuizStateService } from '@quiz/services';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { QuizCategoriesApiService } from './services/quiz-categories-api.service';
+import { QuizCategoriesStateService } from './services/quiz-categories-state.service';
 import { QuizQuestionsApiService } from './services/quiz-questions-api.service';
-import { QuzCategoriesStateService } from './services/quz-categories-state.service';
 
 interface QuizForm {
   category: FormControl<number | null>;
@@ -42,7 +42,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     private readonly quizCategoriesApiService: QuizCategoriesApiService,
     private readonly quizQuestionsApiService: QuizQuestionsApiService,
     private readonly quizStateService: QuizStateService,
-    private readonly quizCategoriesStateService: QuzCategoriesStateService,
+    private readonly quizCategoriesStateService: QuizCategoriesStateService,
     private readonly router: Router,
   ) {}
 

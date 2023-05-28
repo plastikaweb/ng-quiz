@@ -5,7 +5,7 @@ import { QuizCategoriesState, QuizCategory } from 'src/core/models';
 @Injectable({
   providedIn: 'root',
 })
-export class QuzCategoriesStateService {
+export class QuizCategoriesStateService {
   private quizCategoriesSubject = new BehaviorSubject<QuizCategory[]>([]);
   private state: QuizCategoriesState = 'init';
   quizCategories$ = this.quizCategoriesSubject.asObservable();
